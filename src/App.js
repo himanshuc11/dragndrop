@@ -1,11 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Draggable from 'react-draggable';
+import { ResizableBox } from 'react-resizable';
+import { useState } from 'react';
 
 function App() {
+
+  let [sizes, setSizes] = useState({width: "100px", height: "100px"})
+
+  let onResize = (event, {element, size, handle}) => {
+    // this.setState({width: size.width, height: size.height});
+    setSizes({width: sizes.width, height: size.height})
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -17,7 +27,17 @@ function App() {
         >
           Learn React
         </a>
+
+        <Draggable>
+          <p>This is draggable</p>
+        </Draggable>
+        
+        <ResizableBox width={200} height={200} onResize={onResize}>
+        <span>Contents</span>
+      </ResizableBox>
       </header>
+
+
     </div>
   );
 }
